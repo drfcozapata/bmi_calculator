@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:imc_calculator/components/gender_selector.dart';
 import 'package:imc_calculator/components/height_selector.dart';
 import 'package:imc_calculator/components/number_selector.dart';
-import 'package:imc_calculator/core/app_colors.dart';
+import 'package:imc_calculator/core/button_styles.dart';
 import 'package:imc_calculator/core/text_styles.dart';
+import 'package:imc_calculator/screens/bmi_result_screen.dart';
 
 class BmiHomeScreen extends StatefulWidget {
   const BmiHomeScreen({super.key});
@@ -15,13 +16,21 @@ class BmiHomeScreen extends StatefulWidget {
 class _BmiHomeScreenState extends State<BmiHomeScreen> {
   int selectedWeight = 70;
   int selectedAge = 25;
+  double selectedHeight = 170;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         GenderSelector(),
-        HeightSelector(),
+        HeightSelector(
+          selectedHeight: selectedHeight,
+          onHeightChange: (newHeight) {
+            setState(() {
+              selectedHeight = newHeight;
+            });
+          },
+        ),
         Padding(
           padding: const EdgeInsets.all(16),
           child: Row(
@@ -69,17 +78,19 @@ class _BmiHomeScreenState extends State<BmiHomeScreen> {
             height: 70,
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {},
-              style: ButtonStyle(
-                shape: WidgetStatePropertyAll(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (context) => BmiResultScreen(
+                          height: selectedHeight,
+                          weight: selectedWeight,
+                        ),
                   ),
-                ),
-                backgroundColor: WidgetStatePropertyAll(
-                  AppColors.backgroundComponent,
-                ),
-              ),
+                );
+              },
+              style: ButtonStyles.finalButton,
               child: Text(
                 'Calcular IMC'.toUpperCase(),
                 style: TextStyles.calculateText,

@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
 class TextStyles {
+  static const TextStyle bigResult = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.w800,
+    fontSize: 70,
+  );
+
   static const TextStyle bigText = TextStyle(
     color: Colors.white,
     fontWeight: FontWeight.w800,
