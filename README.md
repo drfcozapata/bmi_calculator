@@ -1,3 +1,3 @@
-# imc_calculator
+# Calculadora de IMC
 
-A new Flutter project.
+Proyecto de aplicación desarrollada en Flutter que permite calcular el IMC.
